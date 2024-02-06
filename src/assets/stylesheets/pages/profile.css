@@ -1,0 +1,39 @@
+.background-container_profile {
+  background-image: url('../../images/float.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.edit-personal-detail {
+  position: absolute;
+  top: 1rem;
+  right: .8rem;
+}
+.profile-card {
+  margin-top: 8rem;
+}
+.form-box_profile {
+  width: 50%;
+  height: 1.4rem;
+  margin: 2rem auto;
+  color: var(--root-color-gray);
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile-input_disabled {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: var(--root-color-gray);
+}
+
+.error-msg {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgb(247, 195, 37);
+}
+
+/* MOBILE */
+@media screen and (max-width: 480px){
+  .form-box_profile {
+    width: 90%;
+  }
+}

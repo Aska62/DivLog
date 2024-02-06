@@ -1,0 +1,99 @@
+/* MAIN IMAGE */
+.main-image-container {
+  width: 100vw;
+  height: 600px;
+  position: relative;
+}
+.main-image {
+  width: 100vw;
+  height: 600px;
+  background: url('../../images/bubbles.jpg');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  z-index: 0;
+}
+.main-image_cover {
+  width: 100vw;
+  height: 600px;
+  background-color: rgba(50, 50, 47, 0.6);
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.main-image_lead {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 6rem;
+  line-height: 1;
+  color: #fff;
+}
+.main-image_credit {
+  color: #fff;
+  opacity: .8;
+  font-size: .7rem;
+  display: block;
+  width: fit-content;
+  margin: 0;
+  position: absolute;
+  bottom: 2px;
+  right: 3px;
+}
+.main-image_credit a {
+  color: #fff;
+}
+
+/* MENU LIST */
+.home-menu-list {
+  width: 100vw;
+  max-width: 1000px;
+  height: fit-content;
+  margin: 2rem auto 3rem auto;
+  /* background-color: aqua; */
+}
+.home-menu_box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0;
+}
+.home-menu {
+  width: 16rem;
+  height: 10rem;
+  border-radius: 8px;
+  box-shadow: 8px 7px 5px rgba(111, 112, 112, .5);
+  font-size: 3rem;
+  color: #fff;
+  font-weight: bolder;
+  text-align: center;
+  line-height: 10rem;
+  transition-duration: 1s;
+}
+.home-menu:hover {
+  cursor: pointer;
+  box-shadow: 8px 7px 5px rgba(111, 112, 112, .8);
+}
+
+/* TABLET */
+@media only screen and (max-width:890px) {
+  .home-menu_box {
+    margin-top: 3rem;
+  }
+}
+
+
+/* MOBILE */
+@media screen and (max-width: 480px){
+  .home-menu_box {
+    flex-direction: column;
+  }
+  .home-menu {
+    margin-bottom: 2rem;
+  }
+}
+
