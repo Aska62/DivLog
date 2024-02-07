@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
 }
-.edit-personal-detail {
+.btn_edit-personal-detail {
   position: absolute;
   top: 1rem;
   right: .8rem;
@@ -23,6 +23,11 @@
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: var(--root-color-gray);
+}
+.btn_save-profile {
+  width: 2.5rem;
+  margin: 2rem calc(50% - (2.5rem/2));
+  margin-bottom: auto;
 }
 
 .error-msg {

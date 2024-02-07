@@ -134,11 +134,8 @@ function Profile({ currentPage }) {
           <div className='background-container background-container_profile'>
           </div>
           <div className='background-cover'>
-            <button className='btn edit-personal-detail' onClick={(e) => {
-              editing && onSubmit(e)
-              !editing && setEditing((prevState) => !prevState)
-            }}>
-              {editing ? 'Save' : 'Edit'}
+            <button className='btn btn_edit-personal-detail' onClick={(e) => {setEditing((prevState) => !prevState)}}>
+              {editing ? 'Cancel' : 'Edit'}
             </button>
             <div className='profile-card'>
               <form>
@@ -192,7 +189,11 @@ function Profile({ currentPage }) {
                     />
                   </div>
                 </div>
-
+                {editing ?
+                  <button className='btn btn_save-profile' onClick={(e) => {onSubmit(e)}}>
+                  save
+                  </button>
+                  : <></>}
               </form>
             </div>
             <p className='credit'>Photo by Photo by <a href="https://unsplash.com/@nazahery?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Nazarizal Mohammad</a> on <a href="https://unsplash.com/photos/people-swimming-in-the-sea-during-daytime-k5Z2AhnRwT8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
