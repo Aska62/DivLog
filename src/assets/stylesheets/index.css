@@ -351,5 +351,6 @@ footer {
 @import url('./pages/logs.css');
 @import url('./pages/log.css');
 @import url('./pages/plans.css');
+@import url('./pages/plan.css');
 @import url('./pages/profile.css');
 @import url('./pages/signin.css');

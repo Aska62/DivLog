@@ -1,0 +1,12 @@
+.btn-container_plan {
+  justify-content: space-between;
+}
+.btn-box_right {
+  display: flex;
+}
+.btn_edit_plan {
+  margin-right: 3px;
+}
+.btn_edit_plan-to-log {
+  margin-left: 3px;
+}

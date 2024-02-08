@@ -32,8 +32,7 @@ function PlanList({currentPage}) {
           planRef,
           where('isPlan', '==', true),
           where('userRef', '==', auth.currentUser.uid),
-          orderBy('date', 'desc'),
-          limit(10)
+          orderBy('date', 'asc'),
         );
 
         // Execute query
@@ -82,8 +81,8 @@ function PlanList({currentPage}) {
             {plans && plans.length > 0 ? (
               <>
                 <div className='container_logs'>
-                  {plans.map((plan) => (
-                    <Card log={plan} cardType={'plan'}/>
+                  {plans.map((plan, index) => (
+                    <Card log={plan} cardType={'plan'} logNumber={index + 1} key={index} />
                   ))}
                 </div>
               </>

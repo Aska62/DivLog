@@ -32,7 +32,8 @@ function LogList( {currentPage} ) {
           where('isPlan', '==', false),
           where('userRef', '==', auth.currentUser.uid),
           orderBy('entryTime', 'desc'),
-          limit(10)
+          orderBy('date', 'desc'),
+          limit(12)
         );
 
         // Execute query
@@ -80,7 +81,7 @@ function LogList( {currentPage} ) {
             {logs && logs.length > 0 ? (
               <div className='container_logs'>
                 {logs.map((log, index) => (
-                  <Card log={log} cardType={'log'} logNumber={index + 1}/>
+                  <Card log={log} cardType={'log'} logNumber={index + 1} key={index} />
                 ))}
               </div>
             ) : (

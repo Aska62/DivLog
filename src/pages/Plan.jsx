@@ -202,13 +202,15 @@ function Plan({ currentPage }) {
     <>
       <Header />
       <main className='main main_log'>
-        <div className='btn-container'>
-          <button style={{display: editing ? "none" : "block"}} className='btn btn_back_home' onClick={() => navigate('/plans')}>Back To List</button>
-          <button style={{display: editing ? "none" : "block"}} className='btn' onClick={onEditBtnClick}>edit</button>
-          <button style={{display: editing ? "none" : "block"}} className='btn' onClick={onEditAsLogBtnClick}>Edit as Log</button>
-          <button style={{display: editing ? "block" : "none"}} className='btn btn_cancel' onClick={onCancelBtnClick} >cancel</button>
-        </div>
         <PageHeading currentPage={currentPage}/>
+        <div className='btn-container btn-container_plan'>
+          <button style={{display: editing ? "none" : "block"}} className='btn btn_back_home' onClick={() => navigate('/plans')}>Back To List</button>
+          <div className='btn-box_right'>
+            <button style={{display: editing ? "none" : "block"}} className='btn btn_edit_plan' onClick={onEditBtnClick}>Edit</button>
+            <button style={{display: editing ? "none" : "block"}} className='btn btn_edit_plan-to-log' onClick={onEditAsLogBtnClick}>Edit as Log</button>
+            <button style={{display: editing ? "block" : "none"}} className='btn btn_cancel' onClick={onCancelBtnClick} >cancel</button>
+          </div>
+        </div>
         <form className='form-container' onSubmit={onSubmit}>
           <div className="form-category-box">
             <div className="form-box">
