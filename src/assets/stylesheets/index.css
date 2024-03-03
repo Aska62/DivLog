@@ -348,7 +348,7 @@ footer {
 
 
 @import url('./pages/home.css');
-@import url('./pages/logs.css');
+@import url('./pages/logs.css?202402081736');
 @import url('./pages/log.css');
 @import url('./pages/plans.css');
 @import url('./pages/plan.css');

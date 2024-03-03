@@ -102,7 +102,7 @@ function Log({currentPage}) {
     if (log && log.userRef !== auth.currentUser.uid) {
       navigate('/');
     }
-  });
+  }, []);
 
   // Sets userRef to logged in user
   useEffect(() => {
@@ -166,6 +166,7 @@ function Log({currentPage}) {
     await updateDoc(docRef, formData);
     setLoading(false);
     setEditing(false);
+    navigate('/logs');
     toast.success('Log updated');
   }
 

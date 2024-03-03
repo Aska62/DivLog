@@ -149,7 +149,7 @@ function AddLog({ currentPage }) {
 
     setLoading(false);
     toast.success('Log added');
-    navigate(`/log/${docRef.id}`)
+    navigate('/logs');
   }
 
   const onMutate = e => {

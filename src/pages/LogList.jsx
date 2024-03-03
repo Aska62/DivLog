@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -10,56 +10,77 @@ import PageHeading from '../components/PageHeading';
 import Card from '../components/Card';
 
 function LogList( {currentPage} ) {
-  const [logs, setLogs] = useState(null);
+  const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [lastFetchedLog, setLastFetchedLog] = useState(null);
-  const [user, setUser] = useState(null);
+  const [hasUnloadedLog, setHasUnloadedLog] = useState(true);
 
+  const logsFetched = useRef(false);
   const navigate = useNavigate();
   const auth = getAuth();
 
   useEffect(() => {
-    setUser(auth.currentUser);
-
-    const fetchLogs = async () => {
-      try {
-        // Create reference
-        const logRef = collection(db, 'logs');
-
-        // Create query
-        const q = query(
-          logRef,
-          where('isPlan', '==', false),
-          where('userRef', '==', auth.currentUser.uid),
-          orderBy('entryTime', 'desc'),
-          orderBy('date', 'desc'),
-          limit(12)
-        );
-
-        // Execute query
-        const querySnap = await getDocs(q);
-
-        const lastVisible = querySnap.docs[querySnap.docs.length -1];
-        setLastFetchedLog(lastVisible);
-
-        let logs = [];
-
-        querySnap.forEach((doc) => {
-          return logs.push({
-            id: doc.id,
-            data: doc.data()
-          });
-        });
-
-        setLogs(logs);
-        setLoading(false);
-      } catch (error) {
-        toast.error('Could not fetch logs');
-      }
+    if (logsFetched.current === false) {
+      fetchLogs();
+      logsFetched.current = true;
     }
-
-    fetchLogs();
   }, []);
+
+  const fetchLogs = async () => {
+    try {
+      // Create reference
+      const logRef = collection(db, 'logs');
+
+      // Create query
+      let q = query(
+        logRef,
+        where('isPlan', '==', false),
+        where('userRef', '==', auth.currentUser.uid),
+        orderBy('date', 'asc'),
+        orderBy('entryTime', 'asc'),
+        limit(13) // Display 12 logs. 13th is for judging if more unloaded log left
+      );
+
+      // fetch log following the last fetched log
+      if (lastFetchedLog) {
+        q = query(
+          q,
+          startAfter(lastFetchedLog)
+        );
+      }
+
+      // Execute query
+      const querySnap = await getDocs(q);
+
+      // Set last visible log
+      const lastVisible = querySnap.docs[querySnap.docs.length -2];
+      setLastFetchedLog(lastVisible);
+
+      // Set if there are more logs on DB
+      const docLength13 = querySnap.docs.length === 13;
+      setHasUnloadedLog(docLength13);
+
+      // Add newly fetched logs to displayed list
+      let newLogList = [...logs];
+      querySnap.forEach((doc) => {
+        newLogList = [...newLogList, {
+          id: doc.id,
+          data: doc.data()
+        }]
+      });
+
+      // Remove 13th if exists
+      if (docLength13) {
+        newLogList.pop();
+      }
+
+      // Set logs to display
+      setLogs(newLogList);
+      setLoading(false);
+    } catch (error) {
+      toast.error('Could not fetch logs');
+    }
+  }
 
   if(loading) {
     return (
@@ -79,11 +100,16 @@ function LogList( {currentPage} ) {
               <button className='btn btn_add' onClick={() => navigate('/add-log')}>Add New</button>
             </div>
             {logs && logs.length > 0 ? (
-              <div className='container_logs'>
-                {logs.map((log, index) => (
-                  <Card log={log} cardType={'log'} logNumber={index + 1} key={index} />
-                ))}
-              </div>
+              <>
+                <div className='container_logs'>
+                  {logs.map((log, index) => (
+                    <Card log={log} cardType={'log'} logNumber={index + 1} key={index} />
+                  ))}
+                </div>
+                {hasUnloadedLog && (
+                  <button className='btn btn_load-more' onClick={fetchLogs} >Load More</button>
+                )}
+              </>
             ) : (
               <p>No logs yet</p>
             )}
