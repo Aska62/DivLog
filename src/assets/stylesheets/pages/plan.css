@@ -1,5 +1,11 @@
+.background-container_plan {
+  background-image: url("../../images/flesh.jpg");
+}
 .btn-container_plan {
   justify-content: space-between;
+}
+.btn-container_plan .btn_back_home {
+  margin-right: 7px;
 }
 .btn-box_right {
   display: flex;

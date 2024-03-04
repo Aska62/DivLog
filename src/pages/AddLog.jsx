@@ -212,257 +212,264 @@ function AddLog({ currentPage }) {
     <>
       <Header />
       <main className='main main_log'>
-        <div className='btn-container'>
-          <button className='btn btn_cancel' onClick={() => navigate('/logs')}>Back To List</button>
+        <PageHeading currentPage={currentPage}/>
+        <div className='background-container-box'>
+          <div className='background-container background-container_log'>
+          </div>
+          <div className='background-cover'>
+            <div className='btn-container'>
+              <button className='btn btn_cancel' onClick={() => navigate('/logs')}>Back To List</button>
+            </div>
+            <form className='form-container' onSubmit={onSubmit}>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="location">Location:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="text"
+                      id="location"
+                      value={location}
+                      maxLength='32'
+                      onChange={onMutate}
+                      required
+                    />
+                    <p className="error-msg">{locationErrMsg}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="date">Date:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="date"
+                      id="date"
+                      value={moment.unix(date.seconds).format("YYYY-MM-DD")}
+                      onChange={e => {onMutate(e); onLogDateChange(e)}}
+                      required
+                    />
+                    <p className="error-msg">{dateErrMsg}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="purpose">Purpose:</label>
+                  <div className='input-box_log'>
+                    <select
+                      className="input"
+                      type="text"
+                      id="purpose"
+                      value={purpose}
+                      maxLength='32'
+                      onChange={onMutate}
+                      required
+                    >
+                    {purposes.map((val) => (
+                    <option value={val} selected={purpose === val}>{val}</option>
+                    ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="course">Course:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="text"
+                      id="course"
+                      value={course}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <p className='form-heading'>Buddy</p>
+                <div className="form-box">
+                  <label htmlFor="buddy1">1:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="text"
+                      id="buddy1"
+                      value={buddy[0]}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+                <div className="form-box">
+                  <label htmlFor="buddy2">2:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="text"
+                      id="buddy2"
+                      value={buddy[1]}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="maxDepth">Max Depth (m):</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="number"
+                      id="maxDepth"
+                      value={maxDepth}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="entryTime">Entry Time:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="time"
+                      id="entryTime"
+                      value={moment.unix(entryTime.seconds).format("HH:mm")}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+                <div className="form-box">
+                  <label htmlFor="exitTime">Exit Time:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="time"
+                      id="exitTime"
+                      value={moment.unix(exitTime.seconds).format("HH:mm")}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+                <div className="form-box">
+                  <label htmlFor="duration">Duration:</label>
+                  <p id="duration" >{moment.unix(exitTime.seconds).diff(moment.unix(entryTime.seconds), 'minutes') } minutes</p>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="weight">Weight (kg):</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="num"
+                      id="weight"
+                      value={weight}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <p className='form-heading'>Tank Pressure</p>
+                <div className="form-box">
+                  <label htmlFor="tankPressureStart">Start:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="num"
+                      id="tankPressureStart"
+                      value={tankPressureStart}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+                <div className="form-box">
+                  <label htmlFor="tankPressureEnd">End:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="num"
+                      id="tankPressureEnd"
+                      value={tankPressureEnd}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="weather">Weather:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="text"
+                      id="weather"
+                      value={weather}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <p className='form-heading'>Temperature</p>
+                <div className="form-box">
+                  <label htmlFor="temperature">Air:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="num"
+                      id="temperature"
+                      value={temperature}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+                <div className="form-box">
+                  <label htmlFor="waterTemperature">Water:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="num"
+                      id="waterTemperature"
+                      value={waterTemperature}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="visibility">Visibility (m):</label>
+                  <div className='input-box_log'>
+                    <input
+                      className="input"
+                      type="num"
+                      id="visibility"
+                      value={visibility}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <label htmlFor="note">Note:</label>
+                <textarea
+                  className="input textarea"
+                  id="note"
+                  value={note}
+                  onChange={onMutate}
+                />
+              </div>
+              <button className='btn btn_submit'>submit</button>
+            </form>
+            <p className='credit'>Photo by <a href="https://unsplash.com/@cristianpalmer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Cristian Palmer</a> on <a href="https://unsplash.com/photos/blue-and-black-fish-under-water-iiAvy5Eu5vk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
+          </div>
         </div>
-      <PageHeading currentPage={currentPage}/>
-      <form className='form-container' onSubmit={onSubmit}>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="location">Location:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="text"
-                id="location"
-                value={location}
-                maxLength='32'
-                onChange={onMutate}
-                required
-              />
-              <p className="error-msg">{locationErrMsg}</p>
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="date">Date:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="date"
-                id="date"
-                value={moment.unix(date.seconds).format("YYYY-MM-DD")}
-                onChange={e => {onMutate(e); onLogDateChange(e)}}
-                required
-              />
-              <p className="error-msg">{dateErrMsg}</p>
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="purpose">Purpose:</label>
-            <div className='input-box_log'>
-              <select
-                className="input"
-                type="text"
-                id="purpose"
-                value={purpose}
-                maxLength='32'
-                onChange={onMutate}
-                required
-              >
-              {purposes.map((val) => (
-              <option value={val} selected={purpose === val}>{val}</option>
-              ))}
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="course">Course:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="text"
-                id="course"
-                value={course}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <p className='form-heading'>Buddy</p>
-          <div className="form-box">
-            <label htmlFor="buddy1">1:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="text"
-                id="buddy1"
-                value={buddy[0]}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-          <div className="form-box">
-            <label htmlFor="buddy2">2:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="text"
-                id="buddy2"
-                value={buddy[1]}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="maxDepth">Max Depth (m):</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="number"
-                id="maxDepth"
-                value={maxDepth}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="entryTime">Entry Time:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="time"
-                id="entryTime"
-                value={moment.unix(entryTime.seconds).format("HH:mm")}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-          <div className="form-box">
-            <label htmlFor="exitTime">Exit Time:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="time"
-                id="exitTime"
-                value={moment.unix(exitTime.seconds).format("HH:mm")}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-          <div className="form-box">
-            <label htmlFor="duration">Duration:</label>
-            <p id="duration" >{moment.unix(exitTime.seconds).diff(moment.unix(entryTime.seconds), 'minutes') } minutes</p>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="weight">Weight (kg):</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="num"
-                id="weight"
-                value={weight}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <p className='form-heading'>Tank Pressure</p>
-          <div className="form-box">
-            <label htmlFor="tankPressureStart">Start:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="num"
-                id="tankPressureStart"
-                value={tankPressureStart}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-          <div className="form-box">
-            <label htmlFor="tankPressureEnd">End:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="num"
-                id="tankPressureEnd"
-                value={tankPressureEnd}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="weather">Weather:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="text"
-                id="weather"
-                value={weather}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <p className='form-heading'>Temperature</p>
-          <div className="form-box">
-            <label htmlFor="temperature">Air:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="num"
-                id="temperature"
-                value={temperature}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-          <div className="form-box">
-            <label htmlFor="waterTemperature">Water:</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="num"
-                id="waterTemperature"
-                value={waterTemperature}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <div className="form-box">
-            <label htmlFor="visibility">Visibility (m):</label>
-            <div className='input-box_log'>
-              <input
-                className="input"
-                type="num"
-                id="visibility"
-                value={visibility}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-category-box">
-          <label htmlFor="note">Note:</label>
-          <textarea
-            className="input textarea"
-            id="note"
-            value={note}
-            onChange={onMutate}
-          />
-        </div>
-        <button className='btn btn_submit'>submit</button>
-      </form>
-    </main>
+      </main>
     <Footer />
   </>
   )

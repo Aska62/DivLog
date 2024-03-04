@@ -203,136 +203,143 @@ function Plan({ currentPage }) {
       <Header />
       <main className='main main_log'>
         <PageHeading currentPage={currentPage}/>
-        <div className='btn-container btn-container_plan'>
-          <button style={{display: editing ? "none" : "block"}} className='btn btn_back_home' onClick={() => navigate('/plans')}>Back To List</button>
-          <div className='btn-box_right'>
-            <button style={{display: editing ? "none" : "block"}} className='btn btn_edit_plan' onClick={onEditBtnClick}>Edit</button>
-            <button style={{display: editing ? "none" : "block"}} className='btn btn_edit_plan-to-log' onClick={onEditAsLogBtnClick}>Edit as Log</button>
-            <button style={{display: editing ? "block" : "none"}} className='btn btn_cancel' onClick={onCancelBtnClick} >cancel</button>
+        <div className='background-container-box'>
+          <div className='background-container background-container_plan'>
+          </div>
+          <div className='background-cover'>
+            <div className='btn-container btn-container_plan'>
+              <button style={{display: editing ? "none" : "block"}} className='btn btn_back_home' onClick={() => navigate('/plans')}>Back To List</button>
+              <div className='btn-box_right'>
+                <button style={{display: editing ? "none" : "block"}} className='btn btn_edit_plan' onClick={onEditBtnClick}>Edit</button>
+                <button style={{display: editing ? "none" : "block"}} className='btn btn_edit_plan-to-log' onClick={onEditAsLogBtnClick}>Edit as Log</button>
+                <button style={{display: editing ? "block" : "none"}} className='btn btn_cancel' onClick={onCancelBtnClick} >cancel</button>
+              </div>
+            </div>
+            <form className='form-container' onSubmit={onSubmit}>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="location">Location:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="text"
+                      id="location"
+                      value={location}
+                      maxLength='32'
+                      onChange={onMutate}
+                      required
+                    />
+                    <p className="error-msg">{locationErrMsg}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="date">Date:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="date"
+                      id="date"
+                      value={moment.unix(date.seconds).format("YYYY-MM-DD")}
+                      onChange={e => {onMutate(e); onPlanDateChange(e)}}
+                      required
+                    />
+                    <p className="error-msg">{dateErrMsg}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="purpose">Purpose:</label>
+                  <div className='input-box_log'>
+                    <select
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="text"
+                      id="purpose"
+                      value={purpose}
+                      maxLength='32'
+                      onChange={onMutate}
+                      required
+                    >
+                    {purposes.map((val) => (
+                    <option value={val} selected={purpose == val}>{val}</option>
+                    ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="course">Course:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="text"
+                      id="course"
+                      value={course}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <p className='form-heading'>Buddy</p>
+                <div className="form-box">
+                  <label htmlFor="buddy1">1:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="text"
+                      id="buddy1"
+                      value={buddy[0]}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+                <div className="form-box">
+                  <label htmlFor="buddy2">2:</label>
+                  <div className='input-box_log'>
+                    <input
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="text"
+                      id="buddy2"
+                      value={buddy[1]}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box">
+                  <label htmlFor="maxDepth">Max Depth (m):</label>
+                  <div className='input-box_log'>
+                    <input
+                      className={`input ${editing ? "" : "input_disabled"}`}
+                      type="number"
+                      id="maxDepth"
+                      value={maxDepth}
+                      onChange={onMutate}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-category-box">
+                <div className="form-box form-box_textarea">
+                  <label className="form-label_note" htmlFor="note">Note:</label>
+                  <textarea
+                    className={`input textarea ${editing ? "" : "input_disabled"}`}
+                    id="note"
+                    value={note}
+                    onChange={onMutate}
+                  />
+                </div>
+              </div>
+              <button className='btn btn_submit' style={{display: editing ? "block" : "none"}}>submit</button>
+            </form>
+            <p className='credit'>Photo by <a href="https://unsplash.com/@bibipace?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Bibi Pace</a> on <a href="https://unsplash.com/photos/blue-and-black-fish-under-water-iiAvy5Eu5vk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
           </div>
         </div>
-        <form className='form-container' onSubmit={onSubmit}>
-          <div className="form-category-box">
-            <div className="form-box">
-              <label htmlFor="location">Location:</label>
-              <div className='input-box_log'>
-                <input
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="text"
-                  id="location"
-                  value={location}
-                  maxLength='32'
-                  onChange={onMutate}
-                  required
-                />
-                <p className="error-msg">{locationErrMsg}</p>
-              </div>
-            </div>
-          </div>
-          <div className="form-category-box">
-            <div className="form-box">
-              <label htmlFor="date">Date:</label>
-              <div className='input-box_log'>
-                <input
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="date"
-                  id="date"
-                  value={moment.unix(date.seconds).format("YYYY-MM-DD")}
-                  onChange={e => {onMutate(e); onPlanDateChange(e)}}
-                  required
-                />
-                <p className="error-msg">{dateErrMsg}</p>
-              </div>
-            </div>
-          </div>
-          <div className="form-category-box">
-            <div className="form-box">
-              <label htmlFor="purpose">Purpose:</label>
-              <div className='input-box_log'>
-                <select
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="text"
-                  id="purpose"
-                  value={purpose}
-                  maxLength='32'
-                  onChange={onMutate}
-                  required
-                >
-                {purposes.map((val) => (
-                <option value={val} selected={purpose == val}>{val}</option>
-                ))}
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="form-category-box">
-            <div className="form-box">
-              <label htmlFor="course">Course:</label>
-              <div className='input-box_log'>
-                <input
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="text"
-                  id="course"
-                  value={course}
-                  onChange={onMutate}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="form-category-box">
-            <p className='form-heading'>Buddy</p>
-            <div className="form-box">
-              <label htmlFor="buddy1">1:</label>
-              <div className='input-box_log'>
-                <input
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="text"
-                  id="buddy1"
-                  value={buddy[0]}
-                  onChange={onMutate}
-                />
-              </div>
-            </div>
-            <div className="form-box">
-              <label htmlFor="buddy2">2:</label>
-              <div className='input-box_log'>
-                <input
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="text"
-                  id="buddy2"
-                  value={buddy[1]}
-                  onChange={onMutate}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="form-category-box">
-            <div className="form-box">
-              <label htmlFor="maxDepth">Max Depth (m):</label>
-              <div className='input-box_log'>
-                <input
-                  className={`input ${editing ? "" : "input_disabled"}`}
-                  type="number"
-                  id="maxDepth"
-                  value={maxDepth}
-                  onChange={onMutate}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="form-category-box">
-            <div className="form-box">
-              <label htmlFor="note">Note:</label>
-              <textarea
-                className={`input textarea ${editing ? "" : "input_disabled"}`}
-                id="note"
-                value={note}
-                onChange={onMutate}
-              />
-            </div>
-          </div>
-          <button className='btn btn_submit' style={{display: editing ? "block" : "none"}}>submit</button>
-        </form>
       </main>
       <Footer />
     </>

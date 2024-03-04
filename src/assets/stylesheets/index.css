@@ -165,6 +165,7 @@ footer {
 
 /* Button */
 .btn {
+  width: 5rem;
   border: none;
   background-color: var(--root-color-gray);
   color: var(--root-background-color);
@@ -176,6 +177,13 @@ footer {
 .btn:hover {
   cursor: pointer;
   opacity: .8;
+}
+.btn-container {
+  width: calc(100% - 1.2rem);
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0.5rem 0.6rem;
 }
 
 .background-container-box {
@@ -352,5 +360,6 @@ footer {
 @import url('./pages/log.css');
 @import url('./pages/plans.css');
 @import url('./pages/plan.css');
+@import url('./pages/addPlan.css');
 @import url('./pages/profile.css');
 @import url('./pages/signin.css');
