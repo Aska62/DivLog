@@ -8,8 +8,9 @@ import Header from '../components/Header';
 import Footer from "../components/Footer";
 import PageHeading from '../components/PageHeading';
 import Card from '../components/Card';
+import ToTopBtn from '../components/ToTopBtn';
 
-function LogList( {currentPage} ) {
+function LogList( {currentPage, controlToTopBtnVisibililty, showToTopBtn} ) {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [lastFetchedLog, setLastFetchedLog] = useState(null);
@@ -95,7 +96,7 @@ function LogList( {currentPage} ) {
         <div className='background-container-box'>
           <div className='background-container background-container_logs'>
           </div>
-          <div className='background-cover'>
+          <div className='background-cover' onScroll={(e) => controlToTopBtnVisibililty(e)}>
             <div className='btn-container'>
               <button className='btn btn_add' onClick={() => navigate('/add-log')}>Add New</button>
             </div>
@@ -105,6 +106,7 @@ function LogList( {currentPage} ) {
                   {logs.map((log, index) => (
                     <Card log={log} cardType={'log'} logNumber={index + 1} key={index} />
                   ))}
+                  <ToTopBtn showBtn={showToTopBtn} />
                 </div>
                 {hasUnloadedLog && (
                   <button className='btn btn_load-more' onClick={fetchLogs} >Load More</button>

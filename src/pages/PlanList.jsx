@@ -8,8 +8,9 @@ import Header from '../components/Header';
 import Footer from "../components/Footer";
 import PageHeading from '../components/PageHeading';
 import Card from '../components/Card';
+import ToTopBtn from '../components/ToTopBtn';
 
-function PlanList({currentPage}) {
+function PlanList({currentPage, controlToTopBtnVisibililty, showToTopBtn}) {
   const [plans, setPlans] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchedPlan, setLastFetchedPlan] = useState(null);
@@ -73,7 +74,7 @@ function PlanList({currentPage}) {
         <div className='background-container-box'>
           <div className='background-container background-container_plans'>
           </div>
-          <div className='background-cover'>
+          <div className='background-cover' onScroll={(e) => controlToTopBtnVisibililty(e)}>
             <div className='btn-container'>
               {/* <button className='btn btn_back_home' onClick={() => navigate('/')}>Back To Home</button> */}
               <button className='btn btn_add' onClick={() => navigate('/add-plan')}>Add New</button>

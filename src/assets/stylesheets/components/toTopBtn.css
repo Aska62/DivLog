@@ -1,0 +1,20 @@
+.to-top-btn {
+  width: 3rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-image: url("../../images/logo/fins_dark.png");
+  background-size: cover;
+  background-position: 50%;
+  opacity: 60%;
+  position: fixed;
+  right: 6%;
+  bottom: 70px;
+  display: none;
+}
+.to-top-btn:hover {
+  opacity: 100%;
+}
+.to-top-btn_show {
+  display: block;
+  transition-duration: .7s;
+}

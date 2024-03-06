@@ -1,4 +1,5 @@
 import app from "./firebase.config";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
@@ -15,6 +16,13 @@ import ForgotPassword from "./pages/ForgotPassword";
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
+  const [showToTopBtn, setShowToTopBtn] = useState(false);
+
+  const controlToTopBtnVisibililty = (e) => {
+    const { scrollTop, clientHeight } = e.target;
+    setShowToTopBtn(scrollTop > clientHeight / 4);
+  }
+
   return (
     <>
       <Router>
@@ -23,7 +31,16 @@ function App() {
             <Route path='/' element={<Home currentPage={'home'}/>} />
           </Route>
           <Route path='/logs' element={<PrivateRoute />} >
-            <Route path='/logs' element={<LogList currentPage={'logs'} />} />
+            <Route
+              path='/logs'
+              element={
+                <LogList
+                  currentPage={'logs'}
+                  controlToTopBtnVisibililty={controlToTopBtnVisibililty}
+                  showToTopBtn={showToTopBtn}
+                />
+              }
+            />
           </Route>
           <Route path='/log' element={<PrivateRoute />} >
             <Route path='/log/:logId' element={<Log currentPage={'log'} />} />
@@ -32,7 +49,16 @@ function App() {
             <Route path='/add-log' element={<AddLog currentPage={'add log'} />} />
           </Route>
           <Route path='/plans' element={<PrivateRoute />} >
-            <Route path='/plans' element={<PlanList currentPage={'plans'} />} />
+            <Route
+              path='/plans'
+              element={
+                <PlanList
+                  currentPage={'plans'}
+                  controlToTopBtnVisibililty={controlToTopBtnVisibililty}
+                  showToTopBtn={showToTopBtn}
+                />
+              }
+            />
           </Route>
           <Route path='/plan' element={<PrivateRoute />} >
             <Route path='/plan/:planId' element={<Plan  currentPage={'plan'}/>} />
