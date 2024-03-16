@@ -7,7 +7,7 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config.js';
 import { FontAwesomeIcon as FaIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import OAuth from '../components/OAuth';
+import OAuth from '../components/OAuth.jsx';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
