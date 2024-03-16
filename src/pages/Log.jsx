@@ -289,8 +289,8 @@ function Log({currentPage}) {
                         onChange={onMutate}
                         required
                       >
-                      {purposes.map((val) => (
-                      <option value={val} selected={purpose == val}>{val}</option>
+                      {purposes.map((val, index) => (
+                      <option value={val} selected={purpose == val} key={index}>{val}</option>
                       ))}
                       </select>
                     </div>
